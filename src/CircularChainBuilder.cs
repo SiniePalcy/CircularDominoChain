@@ -2,8 +2,7 @@
 {
     public static HashSet<Domino> BuildChain(IReadOnlyList<Domino> dominosSet)
     {
-        var result = new HashSet<Domino>();
-        result.Add(dominosSet[0]);
+        var result = new HashSet<Domino>() { dominosSet[0] };
 
         while(result.Count < dominosSet.Count)
         {
