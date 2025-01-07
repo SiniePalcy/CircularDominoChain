@@ -61,44 +61,4 @@ public class DominosPack : IReadOnlyList<Domino>
     {
         return GetEnumerator();
     }
-
-    public int IndexOf(Domino item)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Insert(int index, Domino item)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void RemoveAt(int index)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Add(Domino item)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Clear()
-    {
-        throw new NotImplementedException();
-    }
-
-    public bool Contains(Domino item)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void CopyTo(Domino[] array, int arrayIndex)
-    {
-        throw new NotImplementedException();
-    }
-
-    public bool Remove(Domino item)
-    {
-        throw new NotImplementedException();
-    }
 }
