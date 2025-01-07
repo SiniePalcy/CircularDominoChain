@@ -4,9 +4,7 @@ Console.Write("How many dominos you'll select: ");
 var selectedDominosCount = int.Parse(Console.ReadLine()!);
 
 Console.Write("Do you want to get random dominos? (y/n): ");
-var answer = Console.ReadLine();
-
-var takedDominos = answer == "y" || answer == "Y"
+var takedDominos = Console.ReadLine().Trim().ToLower() == "y"
     ? pack.TakeRandomDominos(selectedDominosCount) 
     : EnterDominosManually(selectedDominosCount, pack.Count);
 
@@ -39,19 +37,16 @@ static List<Domino> EnterDominosManually(int dominosCount, int maxDominos)
     var result = new List<Domino>(dominosCount);
     for (int i = 0; i < dominosCount; i++)
     {
-        string enteredDominoString = string.Empty;
         Domino? domino = null;
-        do
+        
+        Console.Write($"Enter domino {i + 1} (e.g., 6 0): ");
+        while (!Domino.TryParse(Console.ReadLine(), out domino))
         {
-            Console.Write($"Please enter the {i + 1} domino separated by spaces (for example 6 0): ");
-            enteredDominoString = Console.ReadLine();
-            if (!Domino.TryParse(enteredDominoString, out domino))
-            {
-                Console.WriteLine("Wrong entered data, please, try again");
-            }
-        } while (domino is null);
-
-        result.Add(domino.Value);
+            Console.WriteLine("Invalid input. Please try again.");
+            Console.Write($"Enter domino {i + 1} (e.g., 6 0): ");
+        }
+        
+        result.Add(domino!.Value);
     }
 
     return result;
