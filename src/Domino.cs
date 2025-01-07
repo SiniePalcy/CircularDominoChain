@@ -20,11 +20,15 @@ public readonly struct Domino : IEquatable<Domino>
         SideB = sideB;
     }
 
+    public bool IsDoubled => SideA == SideB;
+
+    public Domino Reverse => new Domino(SideB, SideA);
+
     public bool CanBeConnected(Domino other) =>
-        SideA == other.SideA || 
-        SideA == other.SideB ||
-        SideB == other.SideA || 
-        SideB == other.SideA;
+        SideB == other.SideA ||
+        SideB == other.SideB || 
+        SideA == other.SideA ||
+        SideA == other.SideB;
 
     public bool Equals(Domino other) => 
         (SideA == other.SideA && SideB == other.SideB) ||

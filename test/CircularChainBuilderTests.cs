@@ -54,11 +54,37 @@
 
         var builtChain = new[]
 {
+            new Domino(DominoSide.One, DominoSide.Two),
+            new Domino(DominoSide.Two, DominoSide.Four),
+            new Domino(DominoSide.Four, DominoSide.One),
+        };
+
+        var actualBuiltChain = CircularChainBuilder.BuildChain(testCase);
+
+        Assert.That(actualBuiltChain, Is.EqualTo(builtChain));
+    }
+
+    [Test]
+    public void BuildChain_WithDoubles_Succeeded()
+    {
+        var testCase = new[]
+        {
             new Domino(DominoSide.Two, DominoSide.One),
-            new Domino(DominoSide.One, DominoSide.Four),
+            new Domino(DominoSide.Four, DominoSide.One),
+            new Domino(DominoSide.One, DominoSide.One),
             new Domino(DominoSide.Two, DominoSide.Four),
         };
 
-        Assert.That(CircularChainBuilder.BuildChain(testCase), Is.EqualTo(builtChain));
+        var builtChain = new[]
+{
+            new Domino(DominoSide.Two, DominoSide.One),
+            new Domino(DominoSide.One, DominoSide.One),
+            new Domino(DominoSide.One, DominoSide.Four),
+            new Domino(DominoSide.Four, DominoSide.Two),
+        };
+
+        var actualBuiltChain = CircularChainBuilder.BuildChain(testCase);
+
+        Assert.That(actualBuiltChain, Is.EqualTo(builtChain));
     }
 }

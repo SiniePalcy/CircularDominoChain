@@ -1,10 +1,58 @@
 ﻿public static class CircularChainBuilder
 {
-    public static List<Domino> BuildChain(IEnumerable<Domino> dominosSet)
+    public static HashSet<Domino> BuildChain(IReadOnlyList<Domino> dominosSet)
     {
-        var result = new List<Domino>();
+        var result = new HashSet<Domino>();
+        result.Add(dominosSet[0]);
+
+        while(result.Count < dominosSet.Count)
+        {
+            var current = result.Last();
+            if (!current.IsDoubled)
+            {
+                var dominosToConnect = dominosSet.Where(
+                    domino => !result.Contains(domino) && domino.CanBeConnected(current));
+                Domino? doubledDomino = dominosToConnect
+                    .Select(x => (Domino?) x)
+                    .FirstOrDefault(x => x.Value.IsDoubled);
+
+                var dominoToConnect = doubledDomino.HasValue ? doubledDomino.Value : dominosToConnect.First();
+
+                AddDominoToChain(current, dominoToConnect);
+            }
+            else
+            {
+                var dominoToConnect = dominosSet.First(
+                   domino => !result.Contains(domino) && domino.CanBeConnected(current));
+                AddDominoToChain(current, dominoToConnect);
+            }
+        }
 
         return result;
+
+        void AddDominoToChain(Domino current, Domino connect)
+        {
+            if (current.SideB == connect.SideA)
+            {
+                result.Add(connect);
+            }
+            else if (current.SideB == connect.SideB)
+            {
+                result.Add(connect.Reverse);
+            }
+            else if (current.SideA == connect.SideA)
+            {
+                result.Remove(current);
+                result.Add(current.Reverse);
+                result.Add(connect);
+            }
+            else if (current.SideA == connect.SideB)
+            {
+                result.Remove(current);
+                result.Add(current.Reverse);
+                result.Add(connect.Reverse);
+            }
+        }
     }
 
     public static bool IsCanBeCircular(IEnumerable<Domino> dominosSet)
@@ -33,7 +81,7 @@
                 return false;
             }
 
-            if (values[side] == 2 && dominosSet.Any(x => x.SideA == side && x.SideB == side))
+            if (values[side] == 2 && dominosSet.Any(x => x.SideA == side && x.IsDoubled))
             {
                 return false;
             }

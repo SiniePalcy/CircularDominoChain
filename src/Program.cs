@@ -2,7 +2,7 @@
 
 
 Console.Write("How many dominos you'll select: ");
-var selectedDominosCount = int.Parse(Console.ReadLine());
+var selectedDominosCount = int.Parse(Console.ReadLine()!);
 
 var takedDominos = pack.TakeRandomDominos(selectedDominosCount);
 Console.WriteLine("You selected set: ");
