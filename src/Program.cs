@@ -8,7 +8,7 @@ var answer = Console.ReadLine();
 
 var takedDominos = answer == "y" || answer == "Y"
     ? pack.TakeRandomDominos(selectedDominosCount) 
-    : EnterDominosManually(selectedDominosCount);
+    : EnterDominosManually(selectedDominosCount, pack.Count);
 
 Console.WriteLine("Your selected set: ");
 takedDominos.OutputDominos();
@@ -24,8 +24,18 @@ Console.WriteLine("Your circular chain:");
 chain.OutputDominos();
 
 
-static List<Domino> EnterDominosManually(int dominosCount)
+static List<Domino> EnterDominosManually(int dominosCount, int maxDominos)
 {
+    if (dominosCount < 2)
+    {
+        throw new ArgumentException("You can take minimum 3 dominos");
+    }
+
+    if (dominosCount > maxDominos)
+    {
+        throw new ArgumentException("You can't take more than all dominos");
+    }
+
     var result = new List<Domino>(dominosCount);
     for (int i = 0; i < dominosCount; i++)
     {
