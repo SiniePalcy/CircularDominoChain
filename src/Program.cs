@@ -1,11 +1,16 @@
 ﻿var pack = new DominosPack();
 
-
 Console.Write("How many dominos you'll select: ");
 var selectedDominosCount = int.Parse(Console.ReadLine()!);
 
-var takedDominos = pack.TakeRandomDominos(selectedDominosCount);
-Console.WriteLine("You selected set: ");
+Console.Write("Do you want to get random dominos? (y/n): ");
+var answer = Console.ReadLine();
+
+var takedDominos = answer == "y" || answer == "Y"
+    ? pack.TakeRandomDominos(selectedDominosCount) 
+    : EnterDominosManually(selectedDominosCount);
+
+Console.WriteLine("Your selected set: ");
 takedDominos.OutputDominos();
 
 if (!CircularChainBuilder.IsCanBeCircular(takedDominos))
@@ -18,3 +23,26 @@ var chain = CircularChainBuilder.BuildChain(takedDominos);
 Console.WriteLine("Your circular chain:");
 chain.OutputDominos();
 
+
+static List<Domino> EnterDominosManually(int dominosCount)
+{
+    var result = new List<Domino>(dominosCount);
+    for (int i = 0; i < dominosCount; i++)
+    {
+        string enteredDominoString = string.Empty;
+        Domino? domino = null;
+        do
+        {
+            Console.Write($"Please enter the {i + 1} domino separated by spaces (for example 6 0): ");
+            enteredDominoString = Console.ReadLine();
+            if (!Domino.TryParse(enteredDominoString, out domino))
+            {
+                Console.WriteLine("Wrong entered data, please, try again");
+            }
+        } while (domino is null);
+
+        result.Add(domino.Value);
+    }
+
+    return result;
+}

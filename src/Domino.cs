@@ -40,4 +40,28 @@ public readonly struct Domino : IEquatable<Domino>
         HashCode.Combine((int)SideA + (int)SideB, Math.Min((int)SideA, (int)SideB));
 
     public override string ToString() => $"[{SideA}|{SideB}]";
+
+    public static bool TryParse(string enteredDomino, out Domino? domino)
+    {
+        var parts = enteredDomino.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        try
+        {
+            if (parts.Length != 2 ||
+                !int.TryParse(parts[0], out int sideA) ||
+                !int.TryParse(parts[1], out int sideB) ||
+                !Enum.IsDefined(typeof(DominoSide), sideA) ||
+                !Enum.IsDefined(typeof(DominoSide), sideB))
+            {
+                throw new ArgumentException("Wrong data to parse");
+            }
+
+            domino = new Domino((DominoSide)sideA, (DominoSide)sideB);
+            return true;
+        }
+        catch
+        {
+            domino = null;
+            return false;
+        }
+    }
 }
