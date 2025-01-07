@@ -8,24 +8,16 @@
         while(result.Count < dominosSet.Count)
         {
             var current = result.Last();
-            if (!current.IsDoubled)
-            {
-                var dominosToConnect = dominosSet.Where(
-                    domino => !result.Contains(domino) && domino.CanBeConnected(current));
-                Domino? doubledDomino = dominosToConnect
-                    .Select(x => (Domino?) x)
-                    .FirstOrDefault(x => x.Value.IsDoubled);
+            var dominosToConnect = dominosSet
+                .Where(domino => !result.Contains(domino) && domino.CanBeConnected(current))
+                .ToList();
 
-                var dominoToConnect = doubledDomino.HasValue ? doubledDomino.Value : dominosToConnect.First();
+            var dominoToConnect = dominosToConnect
+                .Select(x => (Domino?)x)
+                .FirstOrDefault(x => x.Value.IsDoubled)
+                ?? dominosToConnect.First();
 
-                AddDominoToChain(current, dominoToConnect);
-            }
-            else
-            {
-                var dominoToConnect = dominosSet.First(
-                   domino => !result.Contains(domino) && domino.CanBeConnected(current));
-                AddDominoToChain(current, dominoToConnect);
-            }
+            AddDominoToChain(current, dominoToConnect!);
         }
 
         return result;
@@ -55,9 +47,10 @@
         }
     }
 
-    public static bool IsCanBeCircular(IEnumerable<Domino> dominosSet)
+    public static bool IsCanBeCircular(IReadOnlyCollection<Domino> dominosSet)
     {
         var values = new Dictionary<DominoSide, int>();
+
         foreach (var domino in dominosSet)
         {
             if (!values.ContainsKey(domino.SideA))
