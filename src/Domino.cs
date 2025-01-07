@@ -20,24 +20,14 @@ public readonly struct Domino : IEquatable<Domino>
         SideB = sideB;
     }
 
-    public bool Equals(Domino other)
-    {
-        return (SideA == other.SideA && SideB == other.SideB) ||
-               (SideA == other.SideB && SideB == other.SideA);
-    }
+    public bool Equals(Domino other) => 
+        (SideA == other.SideA && SideB == other.SideB) ||
+        (SideA == other.SideB && SideB == other.SideA);
 
-    public override bool Equals(object? obj)
-    {
-        return obj is Domino other && Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is Domino other && Equals(other);
 
-    public override int GetHashCode()
-    {
-        return HashCode.Combine((int)SideA + (int)SideB, Math.Min((int)SideA, (int)SideB));
-    }
+    public override int GetHashCode() => 
+        HashCode.Combine((int)SideA + (int)SideB, Math.Min((int)SideA, (int)SideB));
 
-    public override string ToString()
-    {
-        return $"[{SideA}|{SideB}]";
-    }
+    public override string ToString() => $"[{SideA}|{SideB}]";
 }
