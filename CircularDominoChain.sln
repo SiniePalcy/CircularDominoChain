@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CircularDominoChain", "src\CircularDominoChain.csproj", "{285DB388-D308-41D6-9E02-69DF1943D347}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{285DB388-D308-41D6-9E02-69DF1943D347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{285DB388-D308-41D6-9E02-69DF1943D347}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{285DB388-D308-41D6-9E02-69DF1943D347}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{285DB388-D308-41D6-9E02-69DF1943D347}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AADC14E5-B104-4CBA-AFA9-2BDDD651E247}
+	EndGlobalSection
+EndGlobal
