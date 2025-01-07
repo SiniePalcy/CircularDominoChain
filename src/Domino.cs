@@ -39,7 +39,7 @@ public readonly struct Domino : IEquatable<Domino>
     public override int GetHashCode() => 
         HashCode.Combine((int)SideA + (int)SideB, Math.Min((int)SideA, (int)SideB));
 
-    public override string ToString() => $"[{SideA}|{SideB}]";
+    public override string ToString() => $"[{(int)SideA}|{(int)SideB}]";
 
     public static bool TryParse(string enteredDomino, out Domino? domino)
     {
