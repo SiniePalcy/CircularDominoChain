@@ -1,0 +1,39 @@
+# Ignore build output and intermediary files
+/src/bin/
+/src/obj/
+
+# User-specific files
+*.user
+*.vs/
+.vscode/
+
+# Logs
+*.log
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Visual Studio Code-specific
+.vscode/
+*.code-workspace
+
+# Backup and temporary files
+~$*
+*.tmp
+*.bak
+*.swp
+
+# NuGet packages
+*.nupkg
+*.snupkg
+*.nuget.props
+*.nuget.targets
+
+# dotnet tools
+**/dotnet-tools.json
+.dotnet/
+
+# Test-specific folders (if generated during testing)
+test/bin/
+test/obj/
