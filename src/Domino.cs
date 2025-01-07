@@ -20,6 +20,12 @@ public readonly struct Domino : IEquatable<Domino>
         SideB = sideB;
     }
 
+    public bool CanBeConnected(Domino other) =>
+        SideA == other.SideA || 
+        SideA == other.SideB ||
+        SideB == other.SideA || 
+        SideB == other.SideA;
+
     public bool Equals(Domino other) => 
         (SideA == other.SideA && SideB == other.SideB) ||
         (SideA == other.SideB && SideB == other.SideA);

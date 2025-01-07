@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-public static class CircularChainBuilder
+﻿public static class CircularChainBuilder
 {
+    public static List<Domino> BuildChain(IEnumerable<Domino> dominosSet)
+    {
+        var result = new List<Domino>();
+
+        return result;
+    }
+
     public static bool IsCanBeCircular(IEnumerable<Domino> dominosSet)
     {
         var values = new Dictionary<DominoSide, int>();

@@ -14,4 +14,7 @@ if (!CircularChainBuilder.IsCanBeCircular(takedDominos))
     return;
 }
 
+var chain = CircularChainBuilder.BuildChain(takedDominos);
+Console.WriteLine("Your circular chain:");
+chain.OutputDominos();
 
